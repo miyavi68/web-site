@@ -1,0 +1,116 @@
+@media screen and (min-width:320px) {/* sp */
+  .l-footer__container {
+    text-align: center;
+    color: #fff;
+    padding: 16% 0;
+    background-color: #222;
+  }
+  .l-footer__logo {
+    width: 72px;
+    height: 83px;
+    margin-bottom: 20px;
+  }
+  /* 幅をwidthで狭めてjustify-content: space-between;を使っている */
+  .l-footer__sns {
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+    margin: 0 auto 40px;
+  }
+  .l-footer__sns>li {
+    position: relative;
+  }
+  .l-footer__sns>li>a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #3cabe0;
+    border-radius: 50%;
+  }
+  /* aリンクの中のimgをcssで記述するときのクラス指定の方法 */
+  .l-footer__sns>li>a img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .l-footer__info {
+    font-size: 11px;
+    letter-spacing: 2.4px;
+  }
+  .l-footer__info>p:first-child {
+    color: #3cabe0;
+  }
+  .l-footer__info>p:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  .l-footer__bottom {
+    text-align: center;
+    background-color: #3cabe0;
+    line-height: 40px;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 2.4px;
+  }
+}
+
+@media screen and (min-width:640px) {/* pc */
+  .l-footer__container {
+    text-align: center;
+    color: #fff;
+    padding: 120px 0 0 0;
+    height: 434px;
+    background-color: #222;
+  }
+  .l-footer__logo {
+    width: 71px;
+    height: 71px;
+    margin-bottom: 20px;
+  }
+  /* 幅をwidthで狭めてjustify-content: space-between;を使っている */
+  .l-footer__sns {
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+    margin: 0 auto 20px;
+  }
+  .l-footer__sns>li {
+    position: relative;
+  }
+  .l-footer__sns>li>a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #3cabe0;
+    border-radius: 50%;
+  }
+  /* aリンクの中のimgをcssで記述するときのクラス指定の方法 */
+  .l-footer__sns>li>a img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .l-footer__info {
+    display: flex;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 2.4px;
+  }
+  .l-footer__info>p:first-child {
+    color: #3cabe0;
+  }
+  .l-footer__info>p:not(:last-child) {
+    margin: 0 10px 0 0;
+    padding-right: 10px;
+    border-right: 1px solid #fff;
+  }
+  .l-footer__bottom {
+    text-align: center;
+    background-color: #3cabe0;
+    line-height: 40px;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 2.4px;
+  }
+}

@@ -1,0 +1,225 @@
+@media screen and (min-width:320px) {
+  .c-hero {
+    padding-top: 133%;
+    background-image: url(/globalService/assets/images/common/main/img-main-hero-contact.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .c-hero__box {
+    position: absolute;
+    top: 40%;
+    left: 30px;
+    width: 80%;
+  }
+
+  .c-hero__box--subTitle {
+    color: #3cabe0;
+    font-family: Lora;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #3cabe0;
+    padding-bottom: 8%;
+    margin-bottom: 5px;
+  }
+
+  .c-hero__box--title {
+    color: #fff;
+    font-family: Signika;
+    font-weight: 700;
+    font-size: 19vw;
+    letter-spacing: -.5px;
+  }
+
+  .p-contact__container {}
+
+  .p-contact__location--wrapper {
+    padding-top: 80%;
+    background-image: url(/globalService/assets/images/common/main/bg-main-location.png);
+    position: relative;
+    background-size: cover;
+  }
+
+  .p-contact__location--box {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+  }
+
+  .p-contact__location--title {
+    margin-bottom: 20px;
+    font-family: Lora;
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 2px;
+    color: #3cabe0;
+  }
+
+  .p-contact__location--text {
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.56;
+    letter-spacing: 2px;
+  }
+
+  .p-contact__form--container {
+    position: relative;
+    background-color: #3cabe0;
+  }
+
+  .p-contact__form--wrapper {
+    padding: 40px 30px;
+  }
+
+  .p-contact__form {}
+
+  .p-contact__form--select {
+    display: none;
+  }
+
+  /* ここのposition: relative;は.p-contact__datailView--list(ul)の位置の基準 */
+  .p-contact__datailView {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  /* ここのposition: relative;は.p-contact__datailView--box::afterの疑似要素アイコンの基準 */
+  .p-contact__datailView--box {
+    position: relative;
+    height: 60px;
+    padding: 15px;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: .9px;
+    /* padding-left: 20px; */
+    border: solid 2px #fff;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  .p-contact__datailView--box::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 20%;
+    right: 30px;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+  }
+
+  .p-contact__datailView--box.is-active {
+    color: #3cabe0;
+    background-color: #fff;
+  }
+
+  .p-contact__datailView--box.is-active::after {
+    border-color: #3cabe0;
+  }
+
+  .p-contact__datailView--list.hidden {
+    display: none;
+  }
+
+  .p-contact__datailView--list {
+    position: absolute;
+    top: 40px;
+    z-index: 1;
+    color: #fff;
+    /* display: none; */
+    width: 100%;
+    border: 2px solid #fff;
+    background-color: #3cabe0;
+  }
+
+  .p-contact__datailView--list>li {
+    line-height: 48px;
+    padding-left: 20px;
+    cursor: pointer;
+    transition: .2s;
+  }
+
+  .p-contact__form--input {}
+
+  .p-contact__form--label {
+    margin-bottom: 20px;
+    display: block;
+    height: 60px;
+    border: solid 2px #fff;
+  }
+
+  .p-contact__form--label input {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    letter-spacing: .9px;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .p-contact__form--text {
+    margin-bottom: 20px;
+  }
+
+  .p-contact__form--text textarea {
+    padding: 20px;
+    font-size: 18px;
+    letter-spacing: .9px;
+    width: 100%;
+    border: solid 2px #fff;
+    background-color: transparent;
+  }
+
+  .p-contact__form--btnBox {
+    height: 70px;
+    text-align: center;
+  }
+
+  .p-contact__form--send {
+    width: 240px;
+    height: 70px;
+    background-color: #fff;
+    border: 0;
+    padding: 0;
+  }
+
+  .p-contact__form--send>span {
+    color: #3cabe0;
+    font-family: Signika;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .p-contact-form__err {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #b80744;
+  }
+
+  .p-contact-success {
+    padding: 18.6% 17.3% 21.3%;
+    display: none;
+    text-align: center;
+    opacity: 0;
+  }
+
+  .p-contact-success__ttl {
+    margin-bottom: 30px;
+  }
+
+  .u-fs-s {
+    font-size: 14px;
+    line-height: 2;
+    letter-spacing: 2px;
+  }
+
+  .u-is-hidden-sp {}
+
+}

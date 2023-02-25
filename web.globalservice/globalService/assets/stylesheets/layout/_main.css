@@ -1,0 +1,330 @@
+@media screen and (min-width:320px) {/* sp */
+	.p-main__message {
+		color: #fff;
+		padding: 60px 8%;
+		background-color: #222;
+	}
+	.p-main__message--head {
+		text-align: center;
+	}
+	.p-main__message--greeting {
+		font-size: 18px;
+		letter-spacing: 2px;
+		color: #3cabe0;
+		margin-bottom: 10px;
+	}
+	.p-main__message--title {
+		font-size: 35px;
+		letter-spacing: -.5px;
+		font-weight: 700;
+		font-family: Signika;
+		margin-bottom: 10px;
+	}
+	.p-main__message--body {
+		margin-bottom: 60px;
+	}
+	.p-main__message--text {
+		font-size: 14px;
+		line-height: 2;
+		letter-spacing: 2px;
+	}
+  /* 要素が不可視状態になるが、display: none;と異なり要素の領域は確保されたままになる */
+ /* opacityではコンテンツが見えなくはなるが、リンクなんかは残ってしまう。
+ display:noneを併用するとリンクなんかは消えるけど、アニメーションが効かない。
+ visibility:hidden を併用すると、アニメーションが効きながらもアクセシビリティツリーからは削除されるので、
+ リンクも作用しなくなり、スクリーンリーダーとかも要素を読まなくなる */
+  /* 下からフェードインで表示させるためにtranslateYも追記した*/
+	.p-main__logo {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(50px);
+  }
+  .fadeInUp {
+    animation: fadeInUp 1.5s forwards;
+  }
+	.c-main__label {
+		padding: 30px;
+		background-color: #fff;
+	}
+	.c-main__label--title {
+		margin-bottom: 10px;
+		text-align: center;
+		color: #222;
+		font-family: Signika;
+		font-size: 75px;
+		font-weight: 700;
+	}
+	.c-main__labelBtn {
+		display: block;
+		border: solid 3px #3cabe0;
+		transition: .3s;
+		font-family: Signika;
+		font-size: 18px;
+		font-weight: 700;
+		letter-spacing: -1px;
+		text-align: center;
+		color: #3cabe0;
+		line-height: 1;
+		padding: 26px 22px;
+	}
+	.c-main__works--block {
+		position: relative;
+	}
+	.c-works__img--01 {
+		padding-top: 78.1%;
+		background-image: url(/globalService/assets/images/common/main/img-main-moda_sp.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.c-main__work--text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: #fff; 
+		font-size: 40px;
+		font-weight: 700;
+		text-align: center;
+	}
+	.c-main__work--text::after {
+		position: absolute;
+		content: "";
+		top: 30%;
+		width: 20px;
+		height: 20px;
+		border-top: 1px solid #fff;
+		border-right: 1px solid #fff;
+		transform: rotate(45deg);
+	}
+	.c-works__img--02 {
+		padding-top: 38.9%;
+		background-image: url(/globalService/assets/images/common/main/img-main-ses_sp.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.c-works__img--03 {
+		padding-top: 38.9%;
+		background-image: url(/globalService/assets/images/common/main/img-main-dev_sp.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.p-main__news {
+		padding: 10.6% 8%;
+		background-color: #3cabe0;
+		color: #fff;
+	}
+	.p-main__news--heading {
+		margin-bottom: 30px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #fff;
+		text-align: center;
+	}
+	.p-main__news--subTitle {
+		font-size: 14px;
+		letter-spacing: 5px;
+	}
+	.p-main__news--title {
+		font-family: Signika;
+		font-size: 40px;
+		font-weight: 700;
+	}
+	.p-main__news--listDate {
+		display: block;
+		margin-bottom: 10px;
+		font-size: 13px;
+		letter-spacing: 3.5px;
+	}
+	.p-main__news--listTitle {
+		display: block;
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 3px;
+	}
+}
+@keyframes fadeInUp {
+  0% {
+    opacity:0;
+    visibility: hidden;
+    transform: translateY(50px);
+  }
+  50% {}
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width:640px) {/* sp */
+	.p-main__message {
+		color: #fff;
+		padding: 9.3% 10.9%;
+		background-color: #222;
+	}
+	.p-main__message--head {
+		text-align: center;
+		margin-bottom: 0;
+	}
+	.p-main__message--greeting {
+		font-size: 24px;
+		letter-spacing: 2.7px;
+		color: #3cabe0;
+		margin-bottom: 0;
+	}
+	.p-main__message--title {
+		font-size: 75px;
+		letter-spacing: -1px;
+		font-weight: 700;
+		font-family: Signika;
+		margin-bottom: 10px;
+	}
+	.p-main__message--body {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 80px;
+	}
+	.p-main__message--text {
+		width: 47%;
+		font-size: 14px;
+		line-height: 2;
+		letter-spacing: 2px;
+	}
+	.p-main__logo {
+		width: 65%;
+		margin: 0 auto;
+	}
+	.c-main__label {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 40px;
+		margin: 20px 0;
+		background-color: #fff;
+	}
+	.c-main__label--title {
+		margin-bottom: 0;
+		text-align: center;
+		color: #222;
+		font-family: Signika;
+		font-size: 75px;
+		font-weight: 700;
+	}
+	.c-main__labelBtn {
+		display: block;
+		border: solid 3px #3cabe0;
+		transition: .3s;
+		width: 240px;
+    	height: 70px;
+		font-family: Signika;
+		font-size: 18px;
+		font-weight: 700;
+		letter-spacing: -1px;
+		text-align: center;
+		color: #3cabe0;
+		line-height: 1;
+		padding: 20px 0;
+	}
+	.c-main__works--block {
+		position: relative;
+    float: left;
+    width: 50%;
+	}
+  .clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+	.c-works__img--01 {
+		padding-top: 78.1%;
+		background-image: url(/globalService/assets/images/common/main/img-main-moda_pc.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.c-main__work--text {
+    display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: #fff;
+		font-size: 40px;
+		font-weight: 700;
+		text-align: center;
+	}
+	.c-main__work--text::after {
+		position: absolute;
+		content: "";
+		top: 30%;
+		width: 20px;
+		height: 20px;
+		border-top: 1px solid #fff;
+		border-right: 1px solid #fff;
+		transform: rotate(45deg);
+	}
+	.c-works__img--02 {
+		padding-top: 38.9%;
+		background-image: url(/globalService/assets/images/common/main/img-main-ses_pc.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.c-works__img--03 {
+		padding-top: 38.9%;
+		background-image: url(/globalService/assets/images/common/main/img-main-dev_pc.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.p-main__news {
+    display: flex;
+    padding: 35px 40px;
+		background-color: #3cabe0;
+		color: #fff;
+	}
+	.p-main__news--heading {
+    min-width: 170px;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		border-bottom: none;
+		text-align: left;
+	}
+	.p-main__news--subTitle {
+		font-size: 18px;
+		letter-spacing: 5px;
+    margin-bottom: -5px;
+	}
+	.p-main__news--title {
+		font-family: Signika;
+		font-size: 40px;
+		font-weight: 700;
+	}
+	.p-main__news--body {
+    margin-left: 50px;
+    padding-left: 70px;
+    border-left: 1px solid #fff;
+  }
+	.p-main__news--list>dt {
+    margin-bottom: 10px;
+  }
+	.p-main__news--listDate {
+		display: inline;
+		margin:0 10px 0 0;
+		font-size: 13px;
+		letter-spacing: 3.5px;
+	}
+	.p-main__news--listTitle {
+		display: inline;
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 3px;
+	}
+  .p-main__news--list>dd {
+    font-size: 12px;
+    letter-spacing: 2.6px;
+    line-height: 1.83;
+  }
+}

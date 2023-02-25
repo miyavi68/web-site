@@ -1,0 +1,424 @@
+@media screen and (min-width:320px) {/* sp */
+  /* widthを100%にしてもheaderしか幅いっぱいに広がんなかった。 */
+  /* 画面右端に余白ができて解決出来なかったがoverflow: hidden;で治った */
+  .c-wrap {
+    overflow: hidden;
+  }
+  .c-intro {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #3cabe0;
+  }
+  /* fill を使用するとオブジェクトの内部の色を設定
+  stroke はオブジェクトを囲む線の色を設定 */
+  /* stroke-dasharray:破線のピッチ
+  stroke-dashoffset:破線のスタート位置 */
+  #intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    stroke: #fff;
+    fill: none;
+  }
+  #intro.is-anime {
+    animation: lineAnime ease-in-out .5s forwards;
+  }
+  .l-header {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    z-index: 10;
+    padding: 0 25px;
+    border-bottom: 1px solid rgba(255, 255, 255,0.6);
+    background-color: rgba(34,34,34,0);
+    transition: all .25s;
+  }
+  /* スクロール時、ヘッダーの背景色を変える */
+  .l-header.is-active {
+    background-color: #222;
+  }
+  .l-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+  }
+  .l-header__logo {
+    display: block;
+  }
+  /* jqueryで追加したクラスにさらに複数のクラスで指定。
+  アンカーリンクのgタグのfillの色を変えた */
+  .l-header.is-active .l-header__logo g {
+    fill: #3cabe0;
+  }
+  .l-header__hambergar {
+    position: relative;
+    width: 45px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .l-header__hambergar>span {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all .3s;
+  }
+  .l-header__hambergar>span:nth-child(1) {
+    top: 0;
+  }
+  .l-header__hambergar>span:nth-child(2) {
+    top: 14px;
+  }
+  .l-header__hambergar>span:nth-child(3) {
+    top: 28px;
+  }
+  /* スクロール時、ハンバーガーアイコンの背景色を変える */
+  /* jqueryで追加したクラスにさらに複数のクラスで指定。 */
+  /* 下の場合はアイコンのみ色を変えるため */
+  .l-header.is-active .l-header__hambergar>span {
+    background-color: #3cabe0;
+  }
+  .l-header__hambergar.is-active>span {
+    background-color: #3cabe0;
+  }
+  /* :nth-child()でも可能。terateillで見た。おそらくnth-childとnth-of-typeで記述を分けたかったのかもしれない */
+  .l-header__hambergar.is-active>span:nth-of-type(1) {
+    transform: translateY(12px) rotate(-45deg);
+  }
+  .l-header__hambergar.is-active>span:nth-of-type(2) {
+    opacity: 0;
+  }
+  .l-header__hambergar.is-active>span:nth-of-type(3) {
+    transform: translateY(-16px) rotate(45deg);
+  }
+  .l-header__nav--container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100vh;
+    padding: 70px 0 0 30px;
+    background-color: #fff;
+    transform: translateX(100%);
+    /* transition: .3s ease-out; */
+    animation: menuClose .3s ease-out forwards;
+  }
+  .l-header__nav--container.open {
+    animation: menuOpen .3s ease-out forwards;
+  }
+  /* クラスの切り替え方が分からない*/
+  /* 模範のサイトではハンバーガーアイコンをクリックすると付与されたopenとcloseのクラスが切り替わる */
+  /* 下の記述のように書きたかったが現状わからないため、
+  上の.l-header__nav--containerにanimation: menuClose .3s ease-out forwards;を記述
+  本当は下のような記述になると思う */
+  .l-header__nav--container.close {
+    /* animation: menuClose .3s ease-out forwards; */
+  }
+  .l-header__nav--title {
+    width: 300px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #3cabe0;
+    color: #3cabe0;
+    font-family: Lora;
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 2.7px;
+  }
+  .l-header__navList {
+    font-size: 10vw;
+  }
+  .l-header__navList>li {
+    right: -2560px;
+    position: relative;
+    line-height: 1.5;
+  }
+  /* はじめはこのように記述した。アニメーションは一度しか動かず、メニューを閉じてまた開いてもアニメションは開始されなかった
+  .l-header__navList>li:nth-child(1) {
+    animation: nb1 1s .2s ease-out forwards;}
+  正しくは下の記述。付与されたクラスの恩恵を受けられる
+  アニメーションも正しく動き、閉じたら再度アニメーションを開始する */
+  .l-header__nav--container.open li:nth-child(1) {
+    animation: nb1 .7s .2s ease-out forwards;
+  }
+  .l-header__nav--container.open li:nth-child(2) {
+    animation: nb1 .7s .18s ease-out forwards;
+  }
+  .l-header__nav--container.open li:nth-child(3) {
+    animation: nb1 .7s .16s ease-out forwards;
+  }
+  .l-header__nav--container.open li:nth-child(4) {
+    animation: nb1 .7s .14s ease-out forwards;
+  }
+  .l-header__navList>li>a {
+    display: block;
+    color: #000;
+    font-family: Signika;
+    font-weight: 700;
+    transition: .5s;
+  }
+  .c-header__hero {
+    position: relative;
+    width: 100%;
+    padding-top: 133%;
+    background-image: url(/globalService/assets/images/common/header/hero-hdr__sp.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .c-header__hero--lead {
+    position: absolute;
+    width: 72.8%;
+    top: 70%;
+    left: 13%;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 3.7px;
+  }
+}
+/* @media screenの中に入れると動かない */
+@keyframes lineAnime {
+  0% {
+    fill: transparent;
+  }
+  50% {}
+  100% {
+    fill: #fff;
+  }
+}
+@keyframes menuOpen {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(80%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes menuClose {
+  0% {
+    transform: translateX(0);
+  }
+  50% {}
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes nb1 {
+  0% {
+    right: -2560px;
+  }
+  50% {}
+  100% {
+    right: 0;
+  }
+}
+
+@media screen and (min-width:640px) {/* pc */
+  /* 画面右端に余白ができて解決出来なかったがoverflow: hidden;で治った */
+  .c-wrap {
+    overflow: hidden;
+  }
+  .c-intro {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #3cabe0;
+  }
+  /* fill を使用するとオブジェクトの内部の色を設定
+  stroke はオブジェクトを囲む線の色を設定 */
+  /* stroke-dasharray:破線のピッチ
+  stroke-dashoffset:破線のスタート位置 */
+  #intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    stroke: #fff;
+    fill: none;
+  }
+  #intro.is-anime {
+    animation: lineAnime ease-in-out .5s forwards;
+  }
+  .l-header {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    z-index: 10;
+    padding: 0 25px;
+    border-bottom: 1px solid rgba(255, 255, 255,0.6);
+    background-color: rgba(34,34,34,0);
+    transition: all .25s;
+  }
+  /* スクロール時、ヘッダーの背景色を変える */
+  .l-header.is-active {
+    background-color: #222;
+  }
+  .l-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+  }
+  .l-header__logo {
+    display: block;
+  }
+  /* jqueryで追加したクラスにさらに複数のクラスで指定。
+  アンカーリンクのgタグのfillの色を変えた */
+  .l-header.is-active .l-header__logo g {
+    fill: #3cabe0;
+  }
+  .l-header__hambergar {
+    position: relative;
+    width: 45px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .l-header__hambergar>span {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all .3s;
+  }
+  .l-header__hambergar>span:nth-child(1) {
+    top: 0;
+  }
+  .l-header__hambergar>span:nth-child(2) {
+    top: 14px;
+  }
+  .l-header__hambergar>span:nth-child(3) {
+    top: 28px;
+  }
+  /* スクロール時、ハンバーガーアイコンの背景色を変える */
+  /* jqueryで追加したクラスにさらに複数のクラスで指定。 */
+  /* 下の場合はアイコンのみ色を変えるため */
+  .l-header.is-active .l-header__hambergar>span {
+    background-color: #3cabe0;
+  }
+  .l-header__hambergar.is-active>span {
+    background-color: #3cabe0;
+  }
+  /* :nth-child()でも可能。terateillで見た。おそらくnth-childとnth-of-typeで記述を分けたかったのかもしれない */
+  .l-header__hambergar.is-active>span:nth-of-type(1) {
+    transform: translateY(12px) rotate(-45deg);
+  }
+  .l-header__hambergar.is-active>span:nth-of-type(2) {
+    opacity: 0;
+  }
+  .l-header__hambergar.is-active>span:nth-of-type(3) {
+    transform: translateY(-16px) rotate(45deg);
+  }
+  .l-header__nav--container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    padding: 75px 25px 0 50px;
+    background-color: #fff;
+    transform: translateX(100%);
+    /* transition: .3s ease-out; */
+    animation: menuClose .3s ease-out forwards;
+  }
+  .l-header__nav--container.open {
+    animation: menuOpen .3s ease-out forwards;
+  }
+  /* クラスの切り替え方が分からない*/
+  /* 模範のサイトではハンバーガーアイコンをクリックすると付与されたopenとcloseのクラスが切り替わる */
+  /* 下の記述のように書きたかったが現状わからないため、
+  .l-header__nav--containerにanimation: menuClose .3s ease-out forwards;を記述 */
+  .l-header__nav--container.close {
+    /* animation: menuClose .3s ease-out forwards; */
+  }
+  .l-header__nav--title {
+    width: 300px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #3cabe0;
+    color: #3cabe0;
+    font-family: Lora;
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 2.7px;
+  }
+  .l-header__navList {
+    font-size: 10vw;
+  }
+  .l-header__navList>li {
+    right: -2560px;
+    position: relative;
+    line-height: 1.5;
+  }
+  /* はじめはこのように記述した。アニメーションは一度しか動かず、メニューを閉じてまた開いてもアニメションは開始されなかった
+  .l-header__navList>li:nth-child(1) {
+    animation: nb1 1s .2s ease-out forwards;
+  }
+  正しくは下の記述。付与されたクラスの恩恵を受けられる
+  アニメーションも正しく動き、閉じたら再度アニメーションを開始する */
+  .l-header__nav--container.open li:nth-child(1) {
+    animation: nb1 .7s .2s ease-out forwards;
+  }
+  .l-header__nav--container.open li:nth-child(2) {
+    animation: nb1 .7s .18s ease-out forwards;
+  }
+  .l-header__nav--container.open li:nth-child(3) {
+    animation: nb1 .7s .16s ease-out forwards;
+  }
+  .l-header__nav--container.open li:nth-child(4) {
+    animation: nb1 .7s .14s ease-out forwards;
+  }
+
+  .l-header__navList>li>a {
+    display: block;
+    color: #000;
+    font-size: 40px;
+    font-family: Signika;
+    font-weight: 700;
+    transition: .5s;
+  }
+  .c-header__hero {
+    position: relative;
+    width: 100%;
+    padding-top: 50.7%;
+    background-image: url(/globalService/assets/images/common/header/hero-hdr__pc.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .c-header__hero--lead {
+    position: absolute;
+    width: 55.5%;
+    top: 77%;
+    left: 23%;
+    color: #fff;
+    text-align: center;
+    font-size: 2.3vw;
+    font-weight: 700;
+    line-height: 1.42;
+    letter-spacing: 5.6px;
+  }
+}
