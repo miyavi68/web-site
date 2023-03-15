@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/sample2.css">
+    <title>jQueryライブラリーの読み込みテスト</title>
+</head>
+<body>
+    <h1>3分タイマー</h1>
+    <div id = "area">
+      <div id = "count">
+        <p></p>
+      </div>
+      <div class = "btnArea">
+        <input type = "button"  class = "btn" id = "start" value = "開始ボタン" style = "cursor:pointer">
+        <input type = "button"  class = "btn" id = "stop"  value = "停止ボタン" style = "cursor:pointer">
+        <input type = "button"  class = "btn" id = "reset" value = "リセットボタン" style = "cursor:pointer">
+      </div>
+    </div>
+
+    <ul id = "card"></ul>
+    
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--jQueryライブラリーの読み込みテスト-->
+    <script>
+        //  自作のコードはライブラリ読み込みの後に。
+        //  ↓からスタート!!    
+    
+   
+    $(function() {
+      const $start = $("#start");
+      const $stop = $("#stop");
+      const $reset = $("#reset");
+      const $count = $("#count");
+      const $countText = $count.find("p");
+      const startbtn = document.getElementById("start");
+      const stopbtn = document.getElementById("stop");
+      const resetbtn = document.getElementById("reset");
+
+      const max = 180;
+      const maxShow = "03:00";
+      let counter = 180;
+      let timeShow;
+      let minCalc;
+      let minShow;
+      let secCalc;
+      let secShow;
+      let timerID;
+      let startFlg = false;
+
+      //オープン
+      function open(current) {
+        current.css("pointer-events", "auto");
+        current.css({
+          "background" : "linear-gradient(to left, blue, pink)",	
+        });
+      }
+
+      //クローズ
+      function close(current) {
+        current.css("pointer-events", "none");
+        current.css({
+          "background" : "linear-gradient(to right, gray, white)",
+        });
+      }
+      
+      // 下準備（初期表示）
+      function prepare() {
+        $countText.text(maxShow);
+        open($start);
+        close($stop);
+        close($reset);
+      }
+      
+      // 時間変換 + 時間計算
+      function timeCalc() {
+        minCalc = Math.floor(counter/60);
+        secCalc = counter % 60;
+        minShow = ("0" + minCalc);
+        secShow = ("0" + secCalc).slice(-2);
+        timeShow = (minShow + ":" + secShow);
+        $countText.text(timeShow);
+      }
+      
+      // 【開始ボタン】を押した際のお仕事
+      function startWork() {
+        if(counter === 0) {
+          $count.css("background","linear-gradient(to right, red, white)");
+          setTimeout(function(){
+            alert("Time Over!!");
+          },300);
+          clearInterval(timerID);
+        } else {
+          counter--;
+          timeCalc();
+        }
+      }
+
+      // 【停止ボタン】を押した際のお仕事
+      function stopWork() {
+        clearInterval(timerID);
+      }
+
+      // 【リセットボタン】を押した際のお仕事
+      function resetWork() {
+        clearInterval(timerID);
+        $countText.text(maxShow);
+        counter = max;
+        $count.css("background","white");
+      }
+
+
+
+      //【開始ボタン】を押したとき
+      function clickStart() {
+        startbtn.addEventListener("click",function() {
+          timerID = setInterval(startWork,1000);
+        },false);
+        
+        startbtn.addEventListener("click",function() {
+          close($(this));
+          open($stop);
+          open($reset);
+        },false);
+      }
+      
+      //【停止ボタン】を押したとき
+      function clickStop() {
+        stopbtn.addEventListener("click",function() {
+          stopWork();
+        },false);
+        stopbtn.addEventListener("click",function() {
+          close($(this));
+          open($start);
+          open($reset);
+        },false);
+      }
+      
+      //【リセットボタン】を押したとき
+      function clickReset() {
+        resetbtn.addEventListener("click",function() {
+          resetWork();
+        },false);
+        resetbtn.addEventListener("click",function() {
+          close($(this));
+          close($stop);
+          open($start);
+        },false);
+      }
+
+      prepare();
+      clickStart();
+      clickStop();
+      clickReset();      
+   });
+
+      
+      
+   
+    </script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,11 @@
+html {
+font-size: 62.5%;
+}
+
+.header {
+  font-size: 20px;
+  background: skyblue;
+  text-align: center;
+  padding: 5px 0;
+  font-weight: bold;
+}

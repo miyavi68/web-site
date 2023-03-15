@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/sample5.css">
+    <title>jQueryライブラリーの読み込みテスト</title>
+</head>
+<body>
+  <h1>電卓アプリ</h1>
+  <div class="wrapper">
+    <div class="calc">
+      <div class="calc__header">電　卓</div>
+      <div class="calc__top1">
+        <input class="calc__topText1" type="text" value="">
+        <div class="calc__top2">
+          <input class="calc__topText2" type="text" value="0">
+          <input class="calc__topReset"type="button" value="Ｃ">
+        </div>
+      </div>
+      <div clas="calc__contaier">
+        <ul class="calc__middle">
+          <li class="calc__list">
+            <div class="calc__inner">
+              <input class="calc__num"type="button" value="７" data-calc="7">
+              <input class="calc__num"type="button" value="８" data-calc="8">
+              <input class="calc__num"type="button" value="９" data-calc="9">
+              <input id="devide" class="calc__item"type="button" value="÷" data-calc="÷">
+              <input class="calc__num"type="button" value="４" data-calc="4">
+              <input class="calc__num"type="button" value="５" data-calc="5">
+              <input class="calc__num"type="button" value="６" data-calc="6">
+              <input id="multiply" class="calc__item"type="button" value="×" data-calc="*">
+              <input class="calc__num"type="button" value="１" data-calc="1">
+              <input class="calc__num"type="button" value="２" data-calc="2">
+              <input class="calc__num"type="button" value="３" data-calc="3">
+              <input id="minus"class="calc__item"type="button" value="－" data-calc="-">
+              <input class="calc__num"type="button" value="０" data-calc="0">
+              <input id="reset"class="calc__item"type="button" value="・" data-calc=".">
+              <input id="pulus"class="calc__item"type="button" value="＋" data-calc="+">
+              <input class="calc__result"type="button" value="＝" data-calc="=">
+            </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--jQueryライブラリーの読み込みテスト-->
+    <script>
+        //  自作のコードはライブラリ読み込みの後に。
+        //  ↓からスタート!!
+    $(function(){
+      let numArray = [];
+      let num1 = "";
+      let num2 = "";
+      let calcAttr;
+      let isFirst = true;
+      let doFlg = true;
+      let continueFlg = true;
+      let answer;
+      
+     
+      function calcNum1() {
+         //配列numArrayにデータ属性(calc)の値を入れる。
+         //num1にnumArrayの数字を結合して代入して表示する。
+         num1 = numArray.join(""); 
+         $(".calc__topText2").val(num1);
+      }
+
+      function calcNum2() {
+         //配列numArrayにデータ属性(calc)の値を入れる。
+         //num2にnumArrayの数字を結合して代入して表示する。
+         num2 = numArray.join("");
+         $(".calc__topText2").val(num2);
+      }
+
+      //結果計算
+      function calcResult() {
+        num1 = parseInt(num1);
+        num2 = parseInt(num2);
+        answer = 0;
+
+        switch (calcAttr) {
+          case "pulus":
+            answer = num1 + num2;
+            $(".calc__topText2").val(answer);
+            console.log(answer);
+          break;
+         
+          case "minus":
+            answer = num1 - num2;
+            $(".calc__topText2").val(answer);
+          break;
+
+          case "multiply":
+            answer = num1 * num2;
+            $(".calc__topText2").val(answer);
+            
+          break;
+          
+          case "devide":
+            answer = num1 / num2;
+            $(".calc__topText2").val(answer);
+          break;
+
+          default:
+          break;
+        }
+        
+        num1 = answer;
+      }
+
+
+      //数字が押されたら
+      $(".calc__num").on("click", function(){
+        numArray.push($(this).data("calc"));
+        continueFlg = true;
+        
+        if(isFirst === true) {
+          calcNum1();
+        } else {
+          calcNum2();
+        }
+        });
+
+
+      //記号（+/-/...）が押されたら
+      $(".calc__item").on("click",function(){
+        let item = $(this).val();
+        $(".calc__topText1").val(item);
+        isFirst = false;
+        
+        if(continueFlg === true) {
+          switch (doFlg) {
+            case true:
+              calcAttr = $(this).attr("id");
+            break;
+ 
+            case false:
+              calcResult();
+              calcAttr = $(this).attr("id");
+            break;
+
+            default:
+            break;    
+          }
+        } else {
+          calcAttr = $(this).attr("id");
+        }
+        
+        // 配列初期化
+        numArray = [];
+        doFlg = false;
+        continueFlg = false;
+      });
+
+
+      //イコールが押されたら
+      $(".calc__result").on("click",function(){
+        calcResult();
+        doFlg = true;
+      });
+
+
+      //「クリア」が押されたら
+      $(".calc__topReset").on("click",function(){
+        numArray = [];
+        num1 = "";
+        num2 = "";
+        isFirst = true;
+        doFlg = true;
+        continueFlg = true;
+        answer = 0;
+        $(".calc__topText1").val("");
+        $(".calc__topText2").val(0);
+      });
+
+      //let x = "0.04432";
+      //x = parseFloat(x);
+      //console.log(x);
+
+    });      
+    </script>
+</body>
+</html>
+
+
+
+

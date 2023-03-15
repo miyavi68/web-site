@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/sample4.css">
+    <title>jQueryライブラリーの読み込みテスト</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="container">
+            <div class="header">
+                <p class="header__title">Search Books!</p>
+            </div>
+            <div class="search">
+                <div class="search__text">
+                    <input type="text" id="js-search-word" class="search__text__input" value="" placeholder="検索する">
+                </div>
+                <button id="js-search-button" class="search__btn">検索する</button>
+            </div>
+            <ul class="lists">
+                
+            </ul>
+        </div>
+    </div>
+    
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--jQueryライブラリーの読み込みテスト-->
+    <script>
+        //  自作のコードはライブラリ読み込みの後に。
+        //  ↓からスタート!!    
+    $(function() {
+        let $listsUl = $(".lists");
+        let pageNum = 0;
+        let prevWord = ""; //前回の検索ワード（pre = 前）
+        let keyWord;       //今回の検索ワード
+        let notFound = `<div class="comment">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</div>`
+
+
+        //①1回目にボタンが押されたとき　→　(1)pageNum = 1 (2)keyWordを取得 (3)if文→前回の検索ワード(preWord)が存在しないので 
+        // 【1】pageNumは1, 【2】lists(ul)の中身だけ空(empty)にする(ul自体の枠組みは残す）
+        
+        //②2回目以降に押されたとき[検索結果が前回と被らなかったとき(preWord !== keyWord)]　→　(1)pageNum = 1+1+1+1...（2回目であれば2になる） (2)keyWordを取得
+        //  (3)if文→前回検索ワード(preWord)と今回検索ワード(keyWord)が被らないので 【1】pageNumは1に戻され, 【2】lists(ul)の中身だけ空(empty)にする(ul自体の枠組みは残す）
+        //  要するに、前回の検索結果の中身を空にして（lists(ul).empty）新しいワードの検索ページの1ページ目から取得して、またlists(ul)に戻して再表示しています。
+
+        //③2回目以降に押されたとき[検索結果が前回と被ったとき(preWord === keyWord)]　→　(1)pageNum = 1+1+1+1...（2回目であれば2になる） (2)keyWordを取得
+        //  (3)if文→前回検索ワード(preWord)と今回検索ワード(keyWord)が被るので Trueには引っかからないのでそのまま抜ける。
+        //  要するに、前回と同じワードで続けて検索すると、楽天ブックスに、そのワードに登録されたページの情報を見つけてくる。
+        function operateSearch(){
+          pageNum = pageNum+1
+          keyWord = $("#js-search-word").val();//検索ワードを取得【val();】
+
+            if(prevWord !== keyWord){
+                pageNum = 1;
+                $(".lists").empty();
+                prevWord = keyWord;
+          };
+        }
+        
+        function getApi() {
+          $.ajax({
+                type: "GET",
+                url: "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404",
+                data: {
+                    applicationId: "1053309271580885189",
+                    keyword: keyWord,
+                    format: "json",
+                    bookGenreId: "001",
+                    page: pageNum,
+                    hits: 20,
+                }
+   
+             }).done(function(data) {
+             console.log(data);
+             if (data.hits > 0) {
+               $(".comment").remove();
+                 let list = "";
+                 for (let i=0; i<data.Items.length; i++) {
+                   list += 
+                   `<li class="lists__item">
+                     <div class="lists__item__inner">
+                       <a href=${data.Items[i].Item.itemUrl} class="lists__item__link" target=_blank>
+                         <img src=${data.Items[i].Item.largeImageUrl} class="lists__item__img" alt>
+                         <p class="lists__item__detail">作品名：　${data.Items[i].Item.title}</p>
+                         <p class="lists__item__detail">作者　：　${data.Items[i].Item.author}</p>
+                         <p class="lists__item__detail">出版社：　${data.Items[i].Item.publisherName}</p>
+                       </a>
+                     </div>
+                    </li>`;
+                 }
+                 $(".lists").prepend(list);
+             } else {
+               $(".comment").remove();
+               $listsUl.before(notFound);
+             };
+          });
+        }
+
+
+        $("#js-search-button").on("click", function() {
+          operateSearch();
+          getApi();
+        });
+
+    });
+            
+      
+      
+   
+    </script>
+</body>
+</html>
+
+
+
+

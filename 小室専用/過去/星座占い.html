@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/sample3.css">
+    <title>jQueryライブラリーの読み込みテスト</title>
+</head>
+<body>
+  <h1>星座占い</h1>
+  <div class = "wrap">
+    <div class = "container">
+      <div class = "header">
+        <p>星座占い</p>
+        <p>今日のあなたの運勢を占ってみましょう!!</p>
+      </div>
+      <table class = "table"></table>
+  </div>
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--jQueryライブラリーの読み込みテスト-->
+    <script>
+        //  自作のコードはライブラリ読み込みの後に。
+        //  ↓からスタート!!    
+    $(function(){
+    let rankArray = ["順位"];
+    const itemsArray = [
+      {
+        constellation:[
+          "牡羊座（おひつじ座）",
+          "牡牛座（おうし座）",
+          "双子座（ふたご座）",
+          "蟹座（かに座）",
+          "獅子座（しし座）",
+          "乙女座（おとめ座）",
+          "天秤座（てんびん座）",
+          "蠍座（さそり座）",
+          "射手座（いて座）",
+          "山羊座（やぎ座）",
+          "水瓶座（みずがめ座）",
+          "魚座（うお座）",
+        ],
+      },
+      {
+        todaysLuck:[
+          "f"
+        ],
+      }
+    ];
+    });
+   
+
+      
+      
+   
+    </script>
+</body>
+</html>
+
+
+
+
