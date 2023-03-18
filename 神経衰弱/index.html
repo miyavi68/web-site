@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/style.css">
+	<title>jQueryライブラリーの読み込みテスト</title>
+</head>
+
+<body>
+	<h1>神経衰弱</h1>
+
+	<ul id="card"></ul>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!--jQueryライブラリーの読み込みテスト-->
+	<script>
+		$(function () {
+			const total = 16
+			let cardArray = [];
+			let listArray = [];
+			let $listItem;
+			let firstCard = "";
+			let secondCard = "";
+			isFirst = true;
+
+			function prepareCard() {
+				// cardArray[] 配列に(1,1)(2,2)(3,3)...pushする
+				// push() 配列データの末尾に任意の要素を追加
+				for (let i = 1; i <= total / 2; i++) {
+					cardArray.push(i, i);
+				}
+
+
+				// cardArray[] の配列の中身をランダムに入れ替える。
+				cardArray.sort(function () {
+					return Math.random() - Math.random();
+				});
+
+
+				// $は要素ノードを対象にする時にも使用する。　HTMLから取得してきたのだと一目で分かるから
+				// listArray[]の中に下記の情報をpushする
+				// id(#card)にappendする <li>を要素として<ul id="card"></ul>に追加する
+				// append() 指定した要素内の最後に引数のコンテンツを追加
+				// find() 対象となる要素から下にある階層をすべて辿って目的の「子要素」を取得する
+				for (let i = 0; i < total; i++) {
+					listArray.push(`<li class= "close" data-num = "${cardArray[i]}">?</li>`);
+				}
+				$("#card").append(listArray);
+				$listItem = $("#card").find("li");
+			}
+
+
+			// カードをクリックした後の処理(開けたとき)
+			//currentを入れなかったらnumが表示されなかった
+			//openCard(current)のcurrentが無い場合でもエラーになった
+			//$(listItem).cssでもエラー
+			// openCard(listItem)と$(listItem).cssの場合正常に作動
+			function openCard(current) {
+				$(current).css("pointer-events", "none").removeClass("close").text($(current).data("num"));
+			}
+
+
+			// カードをクリックした後の処理(閉じたとき)
+			function closeCard(current) {
+				$(current).css("pointer-events", "auto").addClass("close").text("?");
+			}
+
+
+			// 全部カードが開いた後の処理
+			function alertCard() {
+				if ($(".close").length === 0) {
+					setTimeout(function () {
+						alert("Game Clear!!!");
+					}, 1500);
+				} else {}
+			}
+
+
+			// ロック処理（お手付きを防ぐ）
+			function lockCard() {
+				$(".close").css("pointer-events", "none");
+				setTimeout(function () {
+					$(".close").css("pointer-events", "auto");
+				}, 1000);
+			}
+
+
+			// カード比較(正誤判定)
+			function compareCard() {
+				if (firstCard.data("num") === secondCard.data("num")) {
+					setTimeout(function () {
+						firstCard.addClass("red");
+						secondCard.addClass("red");
+					}, 500);
+				} else {
+					lockCard();
+					setTimeout(function () {
+						closeCard(firstCard);
+						closeCard(secondCard);
+					}, 1000);
+				}
+			}
+
+
+			//全てを合わせた処理
+
+			prepareCard();
+
+			//カードめくる処理
+			$listItem.on("click", function () {
+				if (isFirst) {
+					openCard(this);
+					firstCard = $(this);
+					// firstCard = (this); // $が無いと動かない
+					// firstCard = $listItem; //これだと動かない　赤くなる
+					isFirst = false;
+				} else {
+					openCard(this);
+					secondCard = $(this);
+					// secondCard = (this); // $が無いと動かない
+					// secondCard = $listItem; //これだと動かない　赤くなる
+					compareCard();
+					isFirst = true;
+				}
+				// alertCard()
+			})
+
+			//テンプレートリテラルの【】が()になっていた
+			//pointer-events のsが抜けていた。
+		});
+	</script>
+</body>
+
+</html>
